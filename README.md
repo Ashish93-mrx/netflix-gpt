@@ -14,7 +14,27 @@ If you are developing a production application, we recommend using TypeScript wi
 
 vite installation
 taliwind installation
+header
+routing
 loginform
+signup form
+useRef hook
+-formvalidation
+
+firebase install
+firebase login
+firebase init
+firebase deploy
+
+create sign up user account
+implement sign in api
+created redux store userslice
+onAuth state change
+implemented sign out
+updated profile
+-fetch Movies from TMDB
+
+
 
 
 #features
