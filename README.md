@@ -14,6 +14,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 vite installation
 taliwind installation
+loginform
 
 
 #features
