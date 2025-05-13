@@ -6,6 +6,9 @@ import {addTrailerVideo} from "../utils/movieSlice"
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
 
+//   const nowPlayingMovies = useSelector((store) => store.movies.nowPlayingMovies);
+
+
   const getMovieVideo = async () => {
     const data = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
@@ -19,6 +22,7 @@ const useMovieTrailer = (movieId) => {
   };
 
   useEffect(() => {
+    // (!nowPlayingMovies) && 
     getMovieVideo();
   }, []);
 };
