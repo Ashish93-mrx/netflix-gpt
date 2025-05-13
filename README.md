@@ -33,8 +33,19 @@ onAuth state change
 implemented sign out
 updated profile
 -fetch Movies from TMDB
+-bug fix: if the user is not logged in redirect to the login vice versa
+unsubscribed to the onAuthStateChanged callback
 
+got the TMDB now playing movie API
 
+custom hook for nowplaying movies
+create slice
+update store with movies data
+planing for maincontainer and secondary
+fetch data for trailer video
+update store with trailer video data
+embedded the yoututbe video and make it autoplay and mute
+tailwind classes to male main container look awesome
 
 
 #features
