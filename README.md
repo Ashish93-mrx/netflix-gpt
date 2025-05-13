@@ -47,6 +47,12 @@ update store with trailer video data
 embedded the yoututbe video and make it autoplay and mute
 tailwind classes to male main container look awesome
 
+build secondary component
+movie list and card 
+image cdn url
+made ui better with taliwind
+usePopularmovies and toprated custom hooks
+
 
 #features
 -Login/signup page
