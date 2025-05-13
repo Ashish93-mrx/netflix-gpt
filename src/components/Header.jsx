@@ -30,9 +30,9 @@ const Header = () => {
   const handleGptSearch = () => {
     dispatch(toggleGptSearchView());
   };
-  
+
   const handleChangeLang = (val) => {
-    console.log(val)
+    console.log(val);
     dispatch(changeLanguage(val));
   };
 
@@ -57,29 +57,56 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   return (
-    <div className="absolute w-screen ute py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between md:px-8">
-      <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
+    <div className="absolute w-screen py-2 px-4 bg-gradient-to-b from-black z-10 flex flex-row items-center justify-between gap-4 md:gap-0">
+      {/* Logo */}
+      <img className="w-36 md:w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
+
+      {/* Right Panel (User Info & Actions) */}
       {selectName && (
-        <div className="flex p-2 justify-between">
-          {gptView && (<select onChange={(e)=>handleChangeLang(e.target.value)} className="p-2 bg-gray-900 text-white m-2">
-            {SUPPORTED_LANGUAGES.map((lang) => (
-              <option value={lang.indentifier} key={lang.indentifier}>{lang.name}</option>
-            ))}
-          </select>)}
+        <div className="flex flex-row items-center gap-3 md:gap-5">
+          {/* Language Selector */}
+          {gptView && (
+            <select
+              onChange={(e) => handleChangeLang(e.target.value)}
+              className="p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option value={lang.indentifier} key={lang.indentifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+
           <button
-            className="bg-purple-400 text-white rounded mx-4 py-1 md:py-2 px-4"
             onClick={handleGptSearch}
+            className="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-bold text-white transition-all duration-300 rounded-lg shadow-lg bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-red-500 hover:via-pink-500 hover:to-purple-500 hover:scale-105"
           >
-           {gptView ? 'Home' : 'GPT search'}
+            <span className="absolute inset-0 w-full h-full transform scale-110 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 opacity-30 blur-md"></span>
+            <span className="relative z-10">
+              {gptView ? "Home" : "✨ GPT Search"}
+            </span>
           </button>
-          <img alt="user" className="hidden md:block w-12 h-12" src={USER_AVATAR} />
+
+          {/* User Avatar */}
+          <img
+            alt="user"
+            className="hidden md:block w-10 h-10"
+            src={USER_AVATAR}
+          />
+
+          {/* Sign Out */}
           <button
-            className="font-bold text-white"
-            onClick={() => handleSignOut()}
+            className="text-red-400 hover:text-red-500 font-semibold"
+            onClick={handleSignOut}
           >
-            (Sign Out)
+            Sign Out
           </button>
-          <h5 className="hidden md:block text-yellow-300">{selectName?.displayName}</h5>
+
+          {/* Username */}
+          <h5 className="hidden md:block text-yellow-300 font-medium">
+            {selectName?.displayName}
+          </h5>
         </div>
       )}
     </div>
