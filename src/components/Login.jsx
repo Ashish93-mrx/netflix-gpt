@@ -7,13 +7,13 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { updateProfile } from "firebase/auth";
-import { useDispatch } from 'react-redux'
-import { addUser } from '../utils/userSlice'
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
@@ -44,19 +44,23 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
-          }).then(() => {
-            // Profile updated!
-            const {uid, email, displayName} = auth.currentUser;
-            dispatch(addUser({uid: uid, email:email, displayName:displayName}));
-            // navigate("/browse");
-            // ...
-          }).catch((error) => {
-            // An error occurred
-            // ...
-          });
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName } = auth.currentUser;
+              dispatch(
+                addUser({ uid: uid, email: email, displayName: displayName })
+              );
+              // navigate("/browse");
+              // ...
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
           // ...
-        
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -77,7 +81,7 @@ const Login = () => {
           const user = userCredential.user;
           // console.log(user);
           // ...
-        // navigate("/browse");
+          // navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -96,7 +100,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-        className="h-full object-cover"
+          className="md:h-full md:object-cover object-contain"
           src="https://assets.nflxext.com/ffe/siteui/vlv3/cb17c41d-6a67-4472-8b91-cca977e65276/web/IN-en-20250505-TRIFECTA-perspective_03ae1a85-5dcf-4d20-a8a6-1e61f7ef73cb_medium.jpg"
           alt="bg"
         />
@@ -108,6 +112,7 @@ const Login = () => {
         <h1 className="font-bold text-3xl py-4">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h1>
+
         {!isSignIn && (
           <input
             ref={name}
@@ -135,12 +140,42 @@ const Login = () => {
         >
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
-        <p className="py-4 cursor-pointer">
+        <p className="py-4">
           {isSignIn ? "New to Netflix?" : "Already registered?"}{" "}
-          <span className="cursor-pointer" onClick={toggleForm}>
+          <span
+            className="cursor-pointer underline hover:text-red-500"
+            onClick={toggleForm}
+          >
             {isSignIn ? "Sign Up Now" : "Sign In here "}
           </span>
         </p>
+        {isSignIn && (
+          <div className="bg-gray-800 p-4 rounded-lg mb-6">
+            <p className="text-sm text-gray-300 mb-2 font-semibold">
+              Try these dummy credentials:
+            </p>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm break-all">rock@gmail.com</span>
+              <button
+                type="button"
+                className="text-blue-400 text-xs hover:underline cursor-pointer"
+                onClick={() => navigator.clipboard.writeText("rock@gmail.com")}
+              >
+                Copy
+              </button>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm break-all">Rock@123</span>
+              <button
+                type="button"
+                className="text-blue-400 text-xs hover:underline cursor-pointer"
+                onClick={() => navigator.clipboard.writeText("Rock@123")}
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );
