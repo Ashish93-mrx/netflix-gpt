@@ -15,7 +15,7 @@ const GptMovieSuggestions = () => {
             {movieNames[0]}
         </h1> */}
         {
-            movieNames.map((i,idx) =><MovieList key={i} title={i} movies={movieResults[idx]}/>)
+            movieNames.map((i,idx) =>(movieResults[idx].length && <MovieList key={i} title={i} movies={movieResults[idx]}/>))
         }
         
     </div>

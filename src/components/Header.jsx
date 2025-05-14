@@ -61,10 +61,8 @@ const Header = () => {
       {/* Logo */}
       <img className="w-36 md:w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
 
-      {/* Right Panel (User Info & Actions) */}
       {selectName && (
         <div className="flex flex-row items-center gap-3 md:gap-5">
-          {/* Language Selector */}
           {gptView && (
             <select
               onChange={(e) => handleChangeLang(e.target.value)}
@@ -80,7 +78,7 @@ const Header = () => {
 
           <button
             onClick={handleGptSearch}
-            className="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-bold text-white transition-all duration-300 rounded-lg shadow-lg bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-red-500 hover:via-pink-500 hover:to-purple-500 hover:scale-105"
+            className="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-bold text-white transition-all duration-300 rounded-lg shadow-lg bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-red-500 hover:via-pink-500 hover:to-purple-500 hover:scale-105 cursor-pointer"
           >
             <span className="absolute inset-0 w-full h-full transform scale-110 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 opacity-30 blur-md"></span>
             <span className="relative z-10">
@@ -97,7 +95,7 @@ const Header = () => {
 
           {/* Sign Out */}
           <button
-            className="text-red-400 hover:text-red-500 font-semibold"
+            className="text-red-400 hover:text-red-500 font-semibold cursor-pointer"
             onClick={handleSignOut}
           >
             Sign Out

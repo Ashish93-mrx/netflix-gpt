@@ -130,7 +130,7 @@ const Login = () => {
         />
         <p className="text-red-500 font-bold text-lg py-2">{errorMessage}</p>
         <button
-          className="p-4 my-6 bg-red-700 w-full rounded-lg"
+          className="p-4 my-6 bg-red-700 w-full rounded-lg cursor-pointer"
           onClick={handleButtonClick}
         >
           {isSignIn ? "Sign In" : "Sign Up"}
