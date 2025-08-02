@@ -19,6 +19,33 @@ const Login = () => {
     setIsSignIn(!isSignIn);
   };
 
+  const handleErrorFn = (errorType) => {
+    let message="";
+              switch (errorType) {
+            case "auth/network-request-failed":
+              message = "Network error. Please check your internet connection.";
+              break;
+            case "auth/user-not-found":
+              message = "User not found. Please sign up first.";
+              break;
+            case "auth/wrong-password":
+              message = "Incorrect password. Try again.";
+              break;
+            case "auth/email-already-in-use":
+              message = "This email is already registered.";
+              break;
+            case "auth/invalid-email":
+              message = "Invalid email format.";
+              break;
+            default:
+              message = "Login failed. Please try again.";
+              break;
+          }
+
+          setErrorMessage(message);
+        }
+  
+
   const handleButtonClick = () => {
     //valida[e the form data
     // checkValidData()
@@ -63,11 +90,8 @@ const Login = () => {
           // ...
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(error.code + "-" + error.message);
-          // ..
-        });
+          handleErrorFn(error.code);
+    });
     } else {
       //sign in logic
 
@@ -84,11 +108,16 @@ const Login = () => {
           // navigate("/browse");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(error.code + "-" + error.message);
-        });
+          handleErrorFn(error.code);
+        }
+      );
     }
+  };
+
+  const autofillDummyCredentials = () => {
+    if (email.current) email.current.value = "rock@gmail.com";
+    if (password.current) password.current.value = "Rock@123";
+    if (!isSignIn && name.current) name.current.value = "The Rock";
   };
 
   const email = useRef(null);
@@ -152,28 +181,15 @@ const Login = () => {
         {isSignIn && (
           <div className="bg-gray-800 p-4 rounded-lg mb-6">
             <p className="text-sm text-gray-300 mb-2 font-semibold">
-              Try these dummy credentials:
+              Want to try with dummy credentials?
             </p>
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm break-all">rock@gmail.com</span>
-              <button
-                type="button"
-                className="text-blue-400 text-xs hover:underline cursor-pointer"
-                onClick={() => navigator.clipboard.writeText("rock@gmail.com")}
-              >
-                Copy
-              </button>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm break-all">Rock@123</span>
-              <button
-                type="button"
-                className="text-blue-400 text-xs hover:underline cursor-pointer"
-                onClick={() => navigator.clipboard.writeText("Rock@123")}
-              >
-                Copy
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={autofillDummyCredentials}
+              className="text-white bg-blue-600 px-2 py-1 rounded hover:bg-blue-700"
+            >
+              Autofill Dummy Login
+            </button>
           </div>
         )}
       </form>
